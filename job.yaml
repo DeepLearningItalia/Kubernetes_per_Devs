@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: test-job
+spec:
+  completions: 2
+  activeDeadlineSeconds: 30
+  backoffLimit: 2
+  ttlSecondsAfterFinished: 3600
+  template:
+    spec:
+      containers:
+      - name: busybox
+        image: busybox:latest
+        command: [ "/bin/sh", "-c", "for i in `seq 1 10`; do echo 'Eseguendo il task '$i'...'; sleep 2 ; done" ]
+      restartPolicy: Never

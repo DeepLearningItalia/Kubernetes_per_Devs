@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: command-pod
+spec:
+  containers:
+  - name: busybox
+    image: busybox:latest
+    command: ["/bin/echo"]
+    args: ["Hello DLI!"]
+  restartPolicy: Never

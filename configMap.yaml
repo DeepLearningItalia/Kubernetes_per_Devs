@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-config
+data:
+  my-numeric-conf: "42"
+  another_conf: "the answer to life the universe and everything"
+  users.properties: |
+    some_users=arthur,ford
+    other.users=trillian,marvin

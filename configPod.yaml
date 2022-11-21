@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-config-pod
+spec:
+  containers:
+  - name: busybox
+    image: busybox:latest
+    command: [ "sleep", "infinity" ]
+    env:
+        - name: my-numeric-conf
+          valueFrom:
+            configMapKeyRef:
+              name: test-config
+              key: my-numeric-conf
+        - name: another_conf
+          valueFrom:
+            configMapKeyRef:
+              name: test-config
+              key: another_conf
+    volumeMounts:
+        - name: properties
+          mountPath: "/properties"
+          readOnly: true
+  volumes:
+  - name: properties
+    configMap:
+      name: test-config
+      items:
+      - key: "users.properties"
+        path: "users.properties"
+  restartPolicy: Never

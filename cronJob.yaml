@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: test-cronjob
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      parallelism: 2
+      template:
+        spec:
+          containers:
+          - name: busybox
+            image: busybox:latest
+            command: [ "/bin/sh", "-c", "date; echo 'Sono un Cronjob!'" ]
+          restartPolicy: Never
